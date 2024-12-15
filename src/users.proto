@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package users;
+
+service UsersService {
+  rpc FindOne (UserById) returns (User) {}
+  rpc FindByUsername (UserByUsername) returns (User) {}
+  rpc Create (CreateUserRequest) returns (User) {}
+  rpc Update (UpdateUserRequest) returns (User) {}
+  rpc Delete (UserById) returns (Empty) {}
+  rpc ValidateCredentials (ValidateCredentialsRequest) returns (ValidateCredentialsResponse) {}
+}
+
+message Empty {}
+
+message UserById {
+  string id = 1;
+}
+
+message UserByUsername {
+  string username = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  repeated string roles = 4;
+  string firstName = 5;
+  string lastName = 6;
+  bool isActive = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  string firstName = 4;
+  string lastName = 5;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  optional string email = 2;
+  optional string firstName = 3;
+  optional string lastName = 4;
+  optional string password = 5;
+}
+
+message ValidateCredentialsRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message ValidateCredentialsResponse {
+  bool isValid = 1;
+  User user = 2;
+}
