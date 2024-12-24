@@ -21,7 +21,10 @@
     "test:docker": "docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from users-service-test",
     "test:docker:clean": "docker-compose -f docker-compose.test.yml down -v",
     "test:db:up": "docker-compose -f docker-compose.test-db.yml up -d",
-    "test:db:down": "docker-compose -f docker-compose.test-db.yml down -v"
+    "test:db:down": "docker-compose -f docker-compose.test-db.yml down -v",
+    "typeorm:generate": "typeorm-ts-node-commonjs migration:generate -d src/config/typeorm.config.ts",
+    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d src/config/typeorm.config.ts",
+    "typeorm:revert": "typeorm-ts-node-commonjs migration:revert -d src/config/typeorm.config.ts"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.4",
