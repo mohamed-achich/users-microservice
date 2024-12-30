@@ -1,5 +1,11 @@
 # Users Microservice
 
+[![CI/CD](https://github.com/mohamed-achich/users-microservice/actions/workflows/ci.yaml/badge.svg)](https://github.com/mohamed-achich/users-microservice/actions/workflows/ci.yaml)
+
+Part of the [E-commerce Platform](https://github.com/mohamed-achich/ecommerce-deployment) microservices architecture.
+
+## Overview
+
 A microservice responsible for user management and authentication in the e-commerce system. Built with NestJS and PostgreSQL, it provides gRPC endpoints for user operations and authentication services.
 
 ## Features
@@ -13,7 +19,20 @@ A microservice responsible for user management and authentication in the e-comme
 - Service-to-service authentication
 - Health checks
 
-## User Schema
+## Technical Stack
+
+- **Framework**: NestJS
+- **Language**: TypeScript
+- **Database**: PostgreSQL
+- **ORM**: TypeORM
+- **Communication**: gRPC
+- **Authentication**: JWT
+- **Testing**: Jest
+- **CI/CD**: GitHub Actions
+
+## API Documentation
+
+### User Schema
 
 ```typescript
 {
@@ -38,7 +57,7 @@ enum UserRole {
 }
 ```
 
-## API Endpoints (gRPC)
+### gRPC Endpoints
 
 ```protobuf
 service UsersService {
@@ -60,7 +79,36 @@ npm install
 ```
 
 3. Set up environment variables:
-Create a `.env` file with the following variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Start PostgreSQL:
+```bash
+# Using Docker
+docker-compose up -d db
+
+# Or use your local PostgreSQL instance
+```
+
+5. Run migrations:
+```bash
+npm run migration:run
+```
+
+6. Start the service:
+```bash
+# Development
+npm run start:dev
+
+# Production
+npm run build
+npm run start:prod
+```
+
+### Environment Variables
+
 ```env
 # Server
 PORT=5002
@@ -74,50 +122,24 @@ DB_USERNAME=postgres
 DB_PASSWORD=postgres
 DB_DATABASE=users
 
-# Security
-JWT_SECRET=your_jwt_secret
-BCRYPT_SALT_ROUNDS=10
-SERVICE_AUTH_TOKEN=your_service_auth_token
+# JWT
+JWT_SECRET=your-secret-key
+JWT_EXPIRATION=1h
+
+# gRPC
+GRPC_PORT=5000
 ```
 
-4. Run the service:
-```bash
-# Development
-npm run start:dev
+### Docker Support
 
-# Production
-npm run start:prod
+Build the image:
+```bash
+docker build -t users-microservice .
 ```
 
-## Docker Support
-
-Build and run using Docker:
-
+Run the container:
 ```bash
-# Build the image
-docker build -t users-service .
-
-# Run the container
-docker run -p 5002:5002 -p 5052:5052 users-service
-```
-
-Using Docker Compose:
-
-```bash
-docker-compose up
-```
-
-## Database Migrations
-
-```bash
-# Generate a migration
-npm run migration:generate -- src/migrations/MigrationName
-
-# Run migrations
-npm run migration:run
-
-# Revert migrations
-npm run migration:revert
+docker run -p 3000:3000 -p 5000:5000 users-microservice
 ```
 
 ## Testing
@@ -201,9 +223,16 @@ The service implements comprehensive error handling for:
 
 ## Monitoring
 
-The service exposes metrics for:
-- Authentication attempts
-- User operations
-- Error rates
-- Database operations
-- Service health
+The service exposes the following monitoring endpoints:
+
+- Health Check: `/health`
+- Metrics: `/metrics`
+- OpenAPI Docs: `/docs`
+
+## Related Services
+- [API Gateway](https://github.com/mohamed-achich/api-gateway) - API Gateway and Authentication Service
+- [Orders Service](https://github.com/mohamed-achich/orders-microservice) - Order Management Service
+- [Products Service](https://github.com/mohamed-achich/products-microservice) - Product Catalog Service
+- [E-commerce Deployment](https://github.com/mohamed-achich/ecommerce-deployment) - Infrastructure and Deployment
+
+For the complete architecture and deployment instructions, visit the [E-commerce Platform Deployment Repository](https://github.com/mohamed-achich/ecommerce-deployment).
