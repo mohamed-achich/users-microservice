@@ -1,12 +1,31 @@
-# Users Microservice
+# Users Microservice Demo
 
 [![CI/CD](https://github.com/mohamed-achich/users-microservice/actions/workflows/ci.yaml/badge.svg)](https://github.com/mohamed-achich/users-microservice/actions/workflows/ci.yaml)
 
-Part of the [E-commerce Platform](https://github.com/mohamed-achich/ecommerce-deployment) microservices architecture.
+## About This Demo Project
 
-## Overview
+This microservice is part of a demonstration project showcasing my implementation of a scalable microservices architecture. While it uses an e-commerce context, the focus is on demonstrating clean code, proper system design, and microservices best practices rather than implementing a full e-commerce solution.
 
-A microservice responsible for user management and authentication in the e-commerce system. Built with NestJS and PostgreSQL, it provides gRPC endpoints for user operations and authentication services.
+### Related Components
+
+- **[E-commerce Platform](https://github.com/mohamed-achich/ecommerce-deployment)** - Main deployment and infrastructure demo
+- **[API Gateway](https://github.com/mohamed-achich/api-gateway)** - API management demonstration
+- **[Products Service](https://github.com/mohamed-achich/products-microservice)** - Simple product catalog
+- **[Orders Service](https://github.com/mohamed-achich/orders-microservice)** - Basic order processing
+
+## Users Service Overview
+
+This service demonstrates basic user management and authentication functionality using NestJS and PostgreSQL. It showcases clean architecture, security best practices, and proper database design.
+
+### Key Responsibilities
+
+- User authentication and authorization
+- User profile management
+- Role-based access control (RBAC)
+- Password encryption and validation
+- Session management
+- Security policy enforcement
+- User preferences storage
 
 ## Features
 
